@@ -1,0 +1,250 @@
+<!-- Page for Adding a new law to StateDroneLaw.com -->
+<!-- Makes API call to WordPress REST API, via AJAX script -->
+
+<!-- If this page is accessed by clicking the "Add" button on a new law returned from the updater,
+      the form fields will be pre-filled with data about the law. This is accomplished via URL parameters,
+      which are parsed in a script at the bottom of the page -->
+
+<% include ../partials/header %>
+<script src="/js/addlaw.ajax.js" defer></script>
+
+<div class="pt-1">
+
+  <h2>Add New Law</h2>
+
+  <form class="">
+
+    <hr/>
+
+      <legend>WordPress Taxonomy Data</legend>
+
+      <form id="newLawForm">
+        <div class="form-group row">
+          <label for="newlaw_state" class="col-1 col-form-label font-weight-bold">State</label>
+          <div class="col-2">
+            <input class="form-control" id="newlaw_state" type="text" name="newlaw_state" placeholder="State">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <fieldset class="form-group">
+            <legend class="col-1 col-form-label font-weight-bold">Status: </legend>
+
+              <div class="col-5">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="lawStatus" id="new_lawStatus_current" value="currentLaw">
+                <label class="form-check-label" for="lawStatus">
+                  Current
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="lawStatus" id="new_lawStatus_pending" value="pendingLaw" checked>
+                <label class="form-check-label" for="lawStatus">
+                  Pending
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="lawStatus" id="new_lawStatus_other" value="otherLaw">
+                <label class="form-check-label" for="lawStatus">
+                  Other
+                </label>
+              </div>
+            </div>
+
+        </fieldset>
+      </div>
+
+<!-- maybe later -->
+    <!-- for keywords/tags: look into https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+<!--
+      <div class="form-group row">
+        <label for="new_lawTags" class="col-1 col-form-label font-weight-bold">Keywords</label>
+        <div class="col-10">
+          <input class="form-control" id="new_lawTags" type="text" name="new_lawTags" placeholder="(coming soon)" disabled>
+        </div>
+      </div>
+-->
+
+      <div class="form-group row">
+        <label for="newlaw_OSID" class="col-1 col-form-label font-weight-bold">OSID</label>
+        <div class="col-5">
+          <input class="form-control" id="newlaw_OSID" type="text" name="newlaw_OSID">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="newlaw_slug" class="col-1 col-form-label font-weight-bold">URL Slug</label>
+        <div class="col-5">
+          <input class="form-control" id="newlaw_slug" type="text" name="newlaw_slug" placeholder="CA - SB3872">
+        </div>
+      </div>
+
+    <hr/>
+
+    <div class="form-group row">
+
+        <label for="new_lawMuni" class="col-2 col-form-label font-weight-bold">Municipal Law?</label>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="new_lawMuni_true" id="new_lawMuni_true" value="Yes">
+            Yes
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="new_lawMuni_false" id="new_lawMuni_true" value="No" checked>
+            No
+          </label>
+        </div>
+
+      </div>
+
+    <hr/>
+
+    <legend>Law Info</legend>
+
+      <div class="form-group row">
+        <label for="newlaw_number" class="col-2 col-form-label">Bill Number</label>
+        <div class="col-10">
+          <input class="form-control" id="newlaw_number" type="text" name="newlaw_number" placeholder="SB 3872">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="newlaw_session" class="col-2 col-form-label">Bill Session</label>
+        <div class="col-10">
+          <input class="form-control" id="newlaw_session" type="text" name="newlaw_session" placeholder="2017-2018">
+        </div>
+      </div>
+
+      <!-- maybe later -->
+      <!--
+      <div class="form-group row">
+        <label for="new_lawLastAction" class="col-2 col-form-label">Bill Last Action</label>
+        <div class="col-10">
+          <input class="form-control" id="new_lawLastAction" type="text" name="new_lawLastAction" placeholder="Signed into law">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="new_lawLastDate" class="col-2 col-form-label">Bill Last Action Date</label>
+        <div class="col-10">
+          <input class="form-control" id="new_lawLastDate" type="date" name="new_lawLastDate" value="2018-08-02">
+        </div>
+      </div>
+    -->
+
+<!-- maybe later -->
+<!--
+      <div class="form-group row">
+        <label for="new_lawSponsor" class="col-2 col-form-label">Bill Sponsor</label>
+        <div class="col-10">
+          <input class="form-control" id="new_lawSponsor" type="text" name="new_lawSponsor" placeholder="Senator John Smith">
+        </div>
+      </div>
+-->
+
+      <div class="form-group row">
+        <label for="newlaw_sourceName" class="col-2 col-form-label">Reference Name</label>
+        <div class="col-10">
+          <input class="form-control" id="newlaw_sourceName" type="text" name="newlaw_sourceName" placeholder="Massachusetts State Legislature">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="newlaw_url" class="col-2 col-form-label">Reference URL</label>
+        <div class="col-9">
+          <input class="form-control" id="newlaw_url" type="url" name="newlaw_url" placeholder="https://malegislature.gov/asdf">
+        </div>
+        <div class="col-1">
+          <a href="#">View</a>
+        </div>
+      </div>
+
+    <hr>
+
+    <legend>Summarized Overview</legend>
+
+      <div class="form-group row">
+        <label for="newlaw_summaryTitle" class="col-2 col-form-label">Title:</label>
+        <div class="col-10">
+          <input class="form-control" id="newlaw_summaryTitle" type="text" name="newlaw_summaryTitle" placeholder="Aerial Trespassing & Privacy">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="new_lawCustomContent" class="col-2 col-form-label">Content:</label>
+        <div class="col-10">
+          <textarea class="form-control" id="new_lawCustomContent" name="new_lawCustomContent" rows="3">Placeholder</textarea>
+        </div>
+      </div>
+
+  </form>
+  <button class="btn btn-lg btn-default btn-block btn-primary preview">Generate Preview</button>
+
+  <br><hr><br>
+
+<!-- Placeholder for later - eventually show live preview of how new law will look on live site -->
+  <div id="law_wysiwyg">
+      <!-- Law Header -->
+      <div class="law-heading px-3 py-2">
+        <div class="row">
+          <div class="col-12 col-lg-8 text-center text-lg-left pl-3" id="preview-title">
+            SB 1355 - Correctional Facilities
+          </div>
+          <div class="col-12 col-lg-4 text-center text-lg-right pr-md-3 text-nowrap">
+            <div class="law-date">2017-2018</div>
+          </div>
+
+        </div> <!-- row -->
+      </div> <!-- law-heading -->
+
+      <!-- Law description -->
+      <div class="law-info px-3 py-2">
+        <p>Makes it illegal to fly a drone over the grounds of a state correctional facility. Punishable by a fine of $500. Signed into law September 10, 2018</p>
+      </div>
+
+      <!-- Law footer -->
+      <div class="law-footer px-3 py-2">
+        <div class="row">
+          <div class="col-12 col-md-7 text-center text-md-left pl-3">
+            Reference:
+            <a href="http://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=201720180SB1355">California State Legislature</a>
+          </div>
+          <div class="col-12 col-md-5 text-center text-md-right text-nowrap">
+            <small><i>Posted: October 20, 2018</i></small>
+          </div>
+        </div> <!-- row -->
+      </div> <!-- .law-footer -->
+    </div>
+
+  <button class="btn btn-lg btn-default btn-block btn-primary create">Submit</button>
+
+  <br/><br/>
+
+</div>
+
+<script>
+  //Getting URL parameters code modified from StackOverflow
+  // https://stackoverflow.com/questions/12183572/how-to-use-javascript-to-fill-a-form-on-another-page
+  var GET = {};
+  var queryString = window.location.search.replace(/^\?/, '');
+  queryString.split(/\&/).forEach(function(keyValuePair) {
+      var paramName = keyValuePair.replace(/=.*$/, "");
+      var paramValue = keyValuePair.replace(/^[^=]*\=/, "");
+      GET[paramName] = paramValue;
+  });
+  // console.log(GET);
+
+  document.querySelector("#newlaw_state").value = GET["state"];
+  document.querySelector("#newlaw_number").value = decodeURIComponent(GET["number"]);
+  document.querySelector("#newlaw_slug").value = (GET["state"] + '-' + decodeURIComponent(GET["number"]).replace(/\s+/g, '')).toLowerCase();
+  document.querySelector("#newlaw_session").value = decodeURIComponent(GET["session"]);
+  document.querySelector("#newlaw_url").value = decodeURIComponent(GET["source"]);
+  document.querySelector("#newlaw_sourceName").value = decodeURIComponent(GET["sourceName"]);
+  document.querySelector("#newlaw_OSID").value = GET["osid"];
+  // document.querySelector("#new_lawLastAction").value = decodeURIComponent(GET["action"]);
+  // document.querySelector("#new_lawLastDate").value = decodeURIComponent(GET["actionDate"]);
+</script>
+
+<% include ../partials/footer %>

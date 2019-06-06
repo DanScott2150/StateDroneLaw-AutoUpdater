@@ -1,0 +1,67 @@
+<% include ../partials/header %>
+<script src="/js/editlaw.ajax.js" defer></script>
+
+<div class="pt-1">
+
+<div class="container">
+  <div class="row" style="background: #eee">
+    <div class="col">
+      <h3><span class="law-title"><%= law.title.rendered %></span></h3>
+      <button class="edit-button edit-title" style="float:right">Edit page</button><button class="edit-title save" style="display: none">Save title</button>
+    </div>
+  </div>
+  <div class="row" style="background: #eee">
+  <ul>
+    <li>
+      <em>WP ID: <span class="currentLaw" data-id="<%= law.id %>"><%= law.id %></span></em>
+    </li>
+    <li>
+      <em>Last Updated: <span class="">n/a</span></em>
+    </li>
+    <li>
+      <em>Author: <span class="">n/a</span></em>
+    </li>
+  </ul>
+  </div>
+</div>
+
+<div>
+  <ul>
+    <li><strong>State: </strong><%= law._embedded['wp:term'][0][0].name %></li>
+    <li><strong>Status: </strong><%= law._embedded['wp:term'][1][0].name %></li>
+    <li><strong>Tags: </strong>n/a</li>
+  </ul>
+</div>
+
+<h3>Law Info</h3>
+  <ul>
+      <li>
+        <strong>Bill Number: </strong><span class="law-number"><%= law.acf.bill_number %></span>
+      </li>
+      <li>
+        <strong>Bill Name: </strong><span class="law-name"><%= law.acf.bill_name %></span>
+      </li>
+      <li>
+        <strong>Bill Session: </strong><span class="law-year"><%= law.acf.bill_year %></span>
+      </li>
+      <li>
+        <strong>Bill Last Action: </strong><span class="">n/a</span>
+      </li>
+      <li>
+        <strong>Bill Reference: </strong><span class="law-ref-title"><%= law.acf.ref_title %></span>
+      </li>
+      <li>
+        <strong>Bill Link: </strong><span class="law-ref-link"><%= law.acf.ref_link %></span>
+      </li>
+      <li>
+        <strong>Bill Summary: </strong><span class="law-content"><%= law.content.rendered %></span>
+      </li>
+  </ul>
+
+<br>
+
+<button>View page on StateDroneLaw.com</button>
+
+</div>
+
+<% include ../partials/footer %>

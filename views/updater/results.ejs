@@ -1,0 +1,100 @@
+<% include ../partials/header %>
+<script src="/js/libs/jquery-2.1.3.min.js"></script>
+
+<style>
+  th{
+    white-space: nowrap;
+  }
+  td{
+    white-space: nowrap;
+  }
+
+  .desc{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+  }
+</style>
+
+<div class="container">
+  <p>Total Results: <%= allBills.length %></p>
+</div>
+
+<h1>Updater Results</h1>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>OSID</th>
+        <th>State</th>
+        <th>Bill #</th>
+        <th>Bill Title</th>
+        <th>Session</th>
+        <th>Last Action</th>
+        <th>Date</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody class="sdl-law-list">
+
+
+<!-- Generate table of laws returned from OpenStates API: -->
+<% for(i=0; i<newLaws.length; i++){ %>
+
+  <!-- Generate URL parameters for each law: if user clicks "Add Law" for a law
+        on this table, it brings them to the Add Law page, where the form is pre-filled
+        based on the data in the URL parameters -->
+  <%
+    let urlParameters = `state=${newLaws[i].state.toUpperCase()}` + '&' +
+                        `number=${encodeURIComponent(newLaws[i].number)}` + '&' +
+                        `session=${encodeURIComponent(newLaws[i].session)}` + '&' +
+                        `source=${encodeURIComponent(newLaws[i].source)}` + '&' +
+                        `sourceName=${encodeURIComponent(newLaws[i].sourceName)}` + '&' +
+                        `osid=${newLaws[i].osid}` + '&' +
+                        `action=${encodeURIComponent(newLaws[i].action)}` + '&' +
+                        `actionDate=${encodeURIComponent(newLaws[i].lastAction)}`;
+  %>
+
+  <tr>
+    <td><i>NEW</i></td>
+    <td><a href="../laws/new?<%= urlParameters %>">Add</a></td>
+    <td><%= newLaws[i].osid.slice(-5) %></td>
+    <td><%= newLaws[i].state.toUpperCase() %></td>
+    <td><%= newLaws[i].number %></td>
+    <td><div class="desc"><%= newLaws[i].title %></div></td>
+    <td><%= newLaws[i].session %></td>
+    <td><div class="desc"><%= newLaws[i].action %></div></td>
+    <td><%= newLaws[i].lastAction %></td>
+    <!-- <td><%= newLaws[i].signed %></td> -->
+    <td><a href="<%= newLaws[i].source %>">Link</a></td>
+
+  </tr>
+<% }  %>
+
+<% if(existingLaws && existingLaws.length > 0){
+  for(i=0; i<existingLaws.length; i++){ %>
+
+  <tr>
+    <td>&nbsp;</td>
+    <td><a href="#">Edit</a></td>
+    <td><%= existingLaws[i].osid.slice(-5) %></td>
+    <td><%= existingLaws[i].state.toUpperCase() %></td>
+    <td><%= existingLaws[i].number %></td>
+    <td><div class="desc"><%= existingLaws[i].title %></div></td>
+    <td><%= existingLaws[i].session %></td>
+    <td><div class="desc"><%= existingLaws[i].action %></div></td>
+    <td><%= existingLaws[i].lastAction %></td>
+    <!-- <td><%= existingLaws[i].signed %></td> -->
+    <td><a href="<%= existingLaws[i].source %>">Link</a></td>
+  </tr>
+<% }} %>
+
+
+    </tbody>
+  </table>
+</div>
+
+<% include ../partials/footer %>

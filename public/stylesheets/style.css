@@ -1,0 +1,97 @@
+.login{
+	color: white;
+}
+
+.logout{
+	color: red;
+}
+
+.notLoggedIn{
+	color:red;
+}
+
+.loggedIn{
+	color: white;
+}
+
+.law-content {
+
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-top: 1px dotted #000;
+
+  }
+
+  .law-heading {
+
+    background: #d3d3d3;
+    font-weight: bold;
+
+}
+
+a {
+
+    color: #e8554e;
+
+}
+
+#law_wysiwyg{
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/*--------------------------------------------------------------
+Skeleton content
+--------------------------------------------------------------*/
+.skeleton {
+	background-color: #ddd;
+	color: #ddd;
+	border-color: #ddd;
+}
+
+.post-content.skeleton {
+	height: 10em;
+	width: 100%;
+}
+
+tbody.skeleton{
+	height: 100px;
+	width:100%;
+}
+
+
+/*--------------------------------------------------------------
+Loader overlay
+--------------------------------------------------------------*/
+
+/* AJAX spinner for slow connections */
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+.ajax-loader {
+	height: 1em;
+	width: 1em;
+    text-align: center;
+	animation: spinner .6s linear infinite;
+}
+
+.nav-loader {
+	display: none;
+	position: relative;
+	width: 100%;
+}
+
+.nav-loader .ajax-loader {
+	margin: 2em auto;
+}
+
+li .ajax-loader {
+	position: absolute;
+	top: 1em;
+	right: -.6em;
+}
+
+.loading  {
+	opacity: .25;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>StateDroneLaw - Auto Updater</title>
+
+    <!-- bootstrap includes -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+
+    <!-- Custom styling -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow loggedIn">
+      <a class="navbar-brand col-2 mr-0 py-3" href="/" style="text-align:center;">SDL Updater</a>
+
+      <!-- Text output & styling is toggled via public/js/oauth.js -->
+      <!-- If user is actively logged in to WordPress, updates to show "Signed in to WordPress" -->
+      <!-- Also toggles button to show either "Login" or "Log out" -->
+      <span class="col-3" id="wp_connect_status" style="font-weight: bold;">
+        NOT CONNECTED TO WORDPRESS
+      </span>
+
+      <button type="button" id="login" class="col-1 mr-4 login btn btn-outline-secondary btn-sm">
+        Login
+      </button>
+
+    </nav>
+
+    <div class="container-fluid mt-5">
+      <div class="row">
+        <% include ./sidebar %>
+
+        <main role="main" class="col-10 px-4 pt-3">
